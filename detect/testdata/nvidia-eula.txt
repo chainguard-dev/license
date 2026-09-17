@@ -1,0 +1,10 @@
+End User License Agreement
+
+The NVIDIA CUDA Toolkit software is licensed to you subject to the
+NVIDIA Software License Agreement. By downloading and using the
+software, you agree to be bound by the terms of this NVIDIA CUDA
+Toolkit EULA. This software and the documentation are proprietary
+products of NVIDIA Corporation and are protected by copyright law.
+NVIDIA reserves all rights not expressly granted. You may not reverse
+engineer, decompile, or disassemble the software, nor remove any
+proprietary notices. The software is provided "AS IS" without warranty.
