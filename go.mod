@@ -7,7 +7,7 @@ require (
 	github.com/chainguard-dev/clog v1.8.1
 	github.com/google/go-cmp v0.7.0
 	github.com/google/licenseclassifier/v2 v2.0.0
-	golang.org/x/mod v0.41.0
+	golang.org/x/mod v0.42.0
 )
 
 require (
