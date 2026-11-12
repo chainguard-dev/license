@@ -223,6 +223,12 @@ func TestWithoutGrant(t *testing.T) {
 		// An exception is not a grant: it changes what the license permits
 		// rather than which versions of it apply, so it survives.
 		{id: "GPL-2.0-only WITH Classpath-exception-2.0", want: "GPL-2.0 WITH Classpath-exception-2.0"},
+		// A LicenseRef is opaque: a suffix that looks like a grant is part of
+		// its name.
+		{id: "LicenseRef-Proprietary-only", want: "LicenseRef-Proprietary-only"},
+		{id: "LicenseRef-Vendor-or-later", want: "LicenseRef-Vendor-or-later"},
+		// A grant only ends an identifier.
+		{id: "Foo-only-bar", want: "Foo-only-bar"},
 		{id: "", want: ""},
 	} {
 		t.Run(tt.id, func(t *testing.T) {
@@ -239,5 +245,8 @@ func TestWithoutGrant(t *testing.T) {
 	}
 	if WithoutGrant("GPL-2.0-only") == WithoutGrant("LGPL-2.0-only") {
 		t.Error("GPL and LGPL compared equal")
+	}
+	if WithoutGrant("LicenseRef-Proprietary-only") == WithoutGrant("LicenseRef-Proprietary") {
+		t.Error("two different LicenseRefs compared equal")
 	}
 }

@@ -132,8 +132,9 @@ func Identifiers(expr string) []string {
 }
 
 // grantSuffixRe matches the version-grant suffixes, which are the part of a
-// GPL-family identifier that no license text can establish.
-var grantSuffixRe = regexp.MustCompile(`-(only|or-later)\b`)
+// GPL-family identifier that no license text can establish. A grant only ever
+// ends an identifier, so the match is anchored there.
+var grantSuffixRe = regexp.MustCompile(`-(only|or-later)$`)
 
 // WithoutGrant returns an identifier with any version grant removed.
 //
@@ -146,9 +147,15 @@ var grantSuffixRe = regexp.MustCompile(`-(only|or-later)\b`)
 //
 // A WITH exception is kept, because an exception is not a grant: it changes
 // what the license permits rather than which versions of it apply.
+//
+// A LicenseRef is returned unchanged. Its name is opaque, so a trailing "-only"
+// is part of the name, and stripping it would make two different refs equal.
 func WithoutGrant(id string) string {
+	if IsRef(id) {
+		return strings.TrimSpace(id)
+	}
 	license, exception, hasException := strings.Cut(strings.TrimSpace(id), " "+OperatorWith+" ")
-	stripped := grantSuffixRe.ReplaceAllString(license, "")
+	stripped := grantSuffixRe.ReplaceAllString(strings.TrimSpace(license), "")
 	if hasException {
 		return stripped + " " + OperatorWith + " " + exception
 	}
