@@ -96,3 +96,5 @@ Chainguard employees should make changes in
 External contributions are welcome as pull requests on this repository. An
 approved PR is merged internally in mono and then exported back, so the merge
 will not show up as a merge commit here.
+
+See the [coding agent guidance](./AGENTS.md) before changing classification, the durable keys or the evidence format.
